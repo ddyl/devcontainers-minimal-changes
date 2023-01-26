@@ -59,6 +59,8 @@ jobs:
                           --github-repo ${{ github.repository }} \
                           --registry "$REGISTRY" \
                           --registry-path "$REGISTRY_BASE_PATH" \
+                          --secondary-registry-path "$REGISTRY_BASE_PATH" \
+
 
   image-info:
     name: Trigger info extraction
