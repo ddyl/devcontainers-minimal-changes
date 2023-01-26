@@ -222,20 +222,35 @@ async function isDefinitionVersionAlreadyPublished(definitionId, release, regist
 async function isImageAlreadyPublished(registryName, repositoryName, tagName) {
     registryName = registryName.replace(/\.azurecr\.io.*/, '');
     // Check if repository exists
-    const repositoriesOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'list', '--name', registryName], { shell: true, stdio: 'pipe' });
-    const repositories = JSON.parse(repositoriesOutput);
+    // const repositoriesOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'list', '--name', registryName], { shell: true, stdio: 'pipe' });
+    // const repositories = JSON.parse(repositoriesOutput);
+    const repositoriesOutput = await asyncUtils.spawn('curl', ['-s','https://hub.docker.com/v2/repositories/ddylddyl/'], { shell: true, stdio: 'pipe' });
+    const repositoriesJSON = JSON.parse(repositoriesOutput);
+
+    let repositories = []
+
+    for (var i = 0; i < parseInt(repositoriesJSON.count); i++) {
+        repositories.push(repositoriesJSON.results[i].name)
+    }
+    
     if (repositories.indexOf(repositoryName) < 0) {
         console.log('(*) Repository does not exist. Image version has not been published yet.')
         return false;
     }
 
     // Assuming repository exists, check if tag exists
-    const tagListOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'show-tags',
-        '--name', registryName,
-        '--repository', repositoryName,
-        '--query', `"[?@=='${tagName}']"`
-    ], { shell: true, stdio: 'pipe' });
-    const tagList = JSON.parse(tagListOutput);
+    // const tagListOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'show-tags', '--name', registryName, '--repository', repositoryName, '--query', `"[?@=='${tagName}']"`], { shell: true, stdio: 'pipe' });
+    // const tagList = JSON.parse(tagListOutput);
+
+    const tagsOutput = await asyncUtils.spawn('curl', ['-s','https://hub.docker.com/v2/repositories/' + repositoryName + '/tags?name=' + tagName], { shell: true, stdio: 'pipe' });
+    const tagsJSON = JSON.parse(tagsOutput);
+
+    let tagList = []
+
+    if (parseInt(tagsJSON.count) > 0)
+    {
+        tagList.push(tagsJSON.results[0].name)
+    }
     if (tagList.length > 0) {
         console.log('(*) Image version has already been published.')
         return true;
