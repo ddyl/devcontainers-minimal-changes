@@ -49,6 +49,9 @@ jobs:
         REGISTRY_BASE_PATH: ${{ secrets.REGISTRY_BASE_PATH }}
       run: |
         set -e
+        
+        echo "$REGISTRY"
+        echo "$REGISTRY_BASE_PATH"
 
         # Build and push images
         yarn install
