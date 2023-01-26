@@ -60,9 +60,9 @@ jobs:
                           --pageTotal ${{ matrix.page-total }} \
                           --release ${{ steps.get_tag_name.outputs.tag }} \
                           --github-repo ${{ github.repository }} \
-                          --registry "$REGISTRY" \
-                          --registry-path "$REGISTRY_BASE_PATH" \ 
-                          --secondary-registry-path "$REGISTRY_BASE_PATH" \
+                          --registry docker.io \
+                          --registry-path ddylddyl \ 
+                          --secondary-registry-path ddylddyl \
                           base-ubuntu
 
 
