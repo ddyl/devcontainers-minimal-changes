@@ -48,6 +48,12 @@ jobs:
         REGISTRY: ${{ secrets.AZURE_REGISTRY }}
         REGISTRY_BASE_PATH: ${{ secrets.REGISTRY_BASE_PATH }}
       run: |
+        
+        echo ${{ matrix.page }}
+        echo ${{ matrix.page-total }}
+        echo ${{ steps.get_tag_name.outputs.tag }}
+        echo ${{ github.repository }}
+        
         set -e
 
         # Build and push images
