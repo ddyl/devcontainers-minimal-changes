@@ -47,6 +47,7 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
             stagingFolder = await configUtils.getStagingFolder(release);
             await configUtils.loadConfig(stagingFolder);
             console.log(`********** Definition ID found **********`);
+            console.log(definitionId);
             console.log(`**** Pushing ${definitionId}: ${variant} ${release} ****`);
             await pushImage(
                 definitionId, variant, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImages, secondaryRegistryPath);
