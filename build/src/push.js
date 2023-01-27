@@ -46,7 +46,7 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
         await asyncUtils.forEach(variants, async (variant) => {
             stagingFolder = await configUtils.getStagingFolder(release);
             await configUtils.loadConfig(stagingFolder);
-
+            console.log(`********** Definition ID found **********`);
             console.log(`**** Pushing ${definitionId}: ${variant} ${release} ****`);
             await pushImage(
                 definitionId, variant, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImages, secondaryRegistryPath);
@@ -57,6 +57,7 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
             stagingFolder = await configUtils.getStagingFolder(release);
             await configUtils.loadConfig(stagingFolder);
 
+            console.log(`********** Definition ID not found **********`);
             console.log(`**** Pushing ${currentJob['id']}: ${currentJob['variant']} ${release} ****`);
             await pushImage(
                 currentJob['id'], currentJob['variant'] || null, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImages, secondaryRegistryPath);
