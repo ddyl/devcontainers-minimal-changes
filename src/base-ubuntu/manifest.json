@@ -1,22 +1,13 @@
 {
 	"version": "1.0.7",
 	"variants": [
-		"jammy",
-		"focal",
-		"bionic"
+		"jammy"
 	],
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
 		"architectures": {
 			"jammy": [
-				"linux/amd64",
-				"linux/arm64"
-			],
-			"focal": [
-				"linux/amd64"
-			],
-			"bionic": [
 				"linux/amd64",
 				"linux/arm64"
 			]
@@ -27,16 +18,7 @@
 		"variantTags": {
 			"jammy": [
 				"base:${VERSION}-ubuntu-22.04",
-				"base:${VERSION}-ubuntu22.04",
 				"base:${VERSION}-ubuntu"
-			],
-			"focal": [
-				"base:${VERSION}-ubuntu-20.04",
-				"base:${VERSION}-ubuntu20.04"
-			],
-			"bionic": [
-				"base:${VERSION}-ubuntu-18.04",
-				"base:${VERSION}-ubuntu18.04"
 			]
 		}
 	},
