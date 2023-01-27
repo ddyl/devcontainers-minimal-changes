@@ -244,7 +244,7 @@ require('yargs')
 
 function pushCommand(argv) {
     push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry,
-        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer, argv.secondaryRegistryPath)
+        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer) //, argv.secondaryRegistryPath)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             if(reason.stack) {
