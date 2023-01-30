@@ -64,7 +64,7 @@ jobs:
 
         yarn install
         RELEASE_STRING=$(echo "${{ github.event.inputs.release }}")
-        # | grep -oP 'refs/(heads|tags)/\K(.+)')
+        RELEASE_STRING=$(echo "${{ inputs.release }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         OVERWRITE_STRING=$(if [ "${{ github.event.inputs.overwrite }}" = "false" ]; then echo '--no-overwrite'; else echo '--overwrite'; fi)
         CG_STRING=$(if [ ${{ github.event.inputs.cg }} = "false" ]; then echo '--no-cg'; else echo '--cg'; fi)
 

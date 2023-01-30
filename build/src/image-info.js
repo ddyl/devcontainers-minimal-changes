@@ -35,15 +35,15 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
         const version = configUtils.getVersionFromRelease(release, currentDefinitionId);
         const markdownPath = path.join(historyFolder, `${version}.md`);
         const markdownExists = await asyncUtils.exists(markdownPath);
-
+        
         // Skip if not overwriting and all files exist
         if(! overwrite && 
             (! generateMarkdown || markdownExists) && 
             (! generateManifest || manifestExists)) {
-            console.log(`(*) Skipping ${currentDefinitionId}. Not in overwrite mode and content already exists.`);
-            return;
-        }
-
+                console.log(`(*) Skipping ${currentDefinitionId}. Not in overwrite mode and content already exists.`);
+                return;
+            }
+            
         // Extract information
         const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath,  stubRegistry, stubRegistryPath, currentDefinitionId, alreadyRegistered, buildFirst);
 
@@ -75,6 +75,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
 }
 
 async function getDefinitionImageContent(repo, release, registry, registryPath, stubRegistry, stubRegistryPath, definitionId, alreadyRegistered, buildFirst) {
+
     const dependencies = configUtils.getDefinitionDependencies(definitionId);
     if (typeof dependencies !== 'object') {
         return [];
@@ -85,6 +86,12 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
 
     const variants = configUtils.getVariants(definitionId) || [null];
     const version = configUtils.getVersionFromRelease(release, definitionId);
+
+    console.log(`**********`, release, `**********`);
+    console.log(`**********`, definitionId, `**********`);
+    console.log(`**********`, variants, `**********`);
+    console.log(`**********`, version, `**********`);
+
 
     // Create header for markdown
     let markdown = await generateReleaseNotesHeader(repo, release, definitionId, variants, dependencies);
