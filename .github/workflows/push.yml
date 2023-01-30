@@ -49,6 +49,7 @@ jobs:
         REGISTRY_BASE_PATH: ${{ secrets.REGISTRY_BASE_PATH }}
       run: |
         set -e
+        echo "${{ github.ref }}"
 
         # Build and push images
         yarn install
