@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "b2313ec7493dc127c9712f20654579221d0bcce6"
+                    "commitHash": "338b9a615a276240deaf4b6a26bb3abda204fe3f"
                 }
             }
         },
